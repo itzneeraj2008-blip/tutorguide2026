@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rootcause: a tutor that finds why you keep getting it wrong</title>
+<meta name="description" content="Rootcause is an AI tutor that finds the one wrong idea behind a learner’s repeated mistakes, then asks the right questions to fix it. Perceptron Hackathon 2026, Problem 8.">
+<meta name="theme-color" content="#0a1020">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rootcause: a tutor that finds why you keep getting it wrong">
+<meta property="og:description" content="A 3D scroll walkthrough of an AI tutor that finds the hidden idea behind repeated mistakes. Perceptron Hackathon 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#eef2f9;--card:#ffffff;--ink:#0d1730;--mut:#4d5b78;--line:#cfd8e8;--acc:#2f6be0;--amb:#c76a00;--grn:#0a8a5c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1020;--card:#111a30;--ink:#eaf0fb;--mut:#a3b1cc;--line:#26345a;--acc:#7fa8ff;--amb:#ffb04d;--grn:#3ddc9a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1020;--card:#111a30;--ink:#eaf0fb;--mut:#a3b1cc;--line:#26345a;--acc:#7fa8ff;--amb:#ffb04d;--grn:#3ddc9a;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+#pb{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:5}
+main{position:relative;z-index:1}
+.s{min-height:100vh;display:flex;align-items:center;padding:80px 22px;box-sizing:border-box}
+.s.l{justify-content:flex-start}.s.r{justify-content:flex-end}
+.s.l,.s.r{padding-left:max(22px,6vw);padding-right:max(22px,6vw)}
+.p{max-width:470px;background:var(--card);background:color-mix(in srgb,var(--card) 86%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:28px}
+@media(max-width:780px){.p{max-width:none;width:100%}}
+h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.12;margin:0 0 .5em}
+h1{font-size:clamp(2.3rem,6vw,3.6rem)}h2{font-size:clamp(1.6rem,3.8vw,2.3rem)}
+p{margin:0 0 .9em}p:last-child{margin:0}
+.m{color:var(--mut)}.sm{font-size:.9rem}
+b.a{color:var(--amb)}b.g{color:var(--grn)}b.b{color:var(--acc)}
+.hint{margin-top:18px;color:var(--mut);font-size:.9rem}
+ol{padding-left:1.2em;margin:.6em 0}li{margin:.35em 0}
+body.flat{background:linear-gradient(160deg,var(--bg),var(--card))}
+header{position:fixed;left:0;right:0;top:0;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,4vw) 8px;background:var(--bg);background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header b{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink);text-decoration:none}
+header nav{display:flex;gap:16px;overflow-x:auto;white-space:nowrap;font-size:.9rem}
+header a{color:var(--mut);text-decoration:none}header a:hover{color:var(--ink)}
+footer{position:relative;z-index:1;text-align:center;padding:48px 22px 56px;background:var(--card);border-top:1px solid var(--line)}
+footer p{margin:0 auto .8em;max-width:56ch}
+.btn{display:inline-block;background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;margin:4px}
+.btn.o{background:none;color:var(--ink);border:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style></head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas><div id="pb"></div>
+<header><a href="#s0"><b>Rootcause</b></a><nav><a href="#s1">Problem</a><a href="#s2">How it works</a><a href="#s5">Why different</a><a href="#s6">Proof</a><a href="#s7">Build plan</a></nav></header>
+<main>
+<section class="s l"><div class="p">
+<h1>A tutor that finds why you keep getting it wrong.</h1>
+<p class="m">Most learners aren’t missing facts. One wrong idea in their head keeps causing the same kind of mistake. Rootcause finds that idea and helps fix it.</p>
+<p class="sm m">Perceptron Hackathon 2026, Theme 5: AI That Teaches, Problem 8</p>
+<p class="hint">Scroll to follow the idea.</p>
+</div></section>
+
+<section class="s r"><div class="p">
+<h2>Saying “wrong” doesn’t help</h2>
+<p>Most apps mark an answer wrong and hand you more questions. But every orange block you see here is a different mistake caused by the <b class="a">same hidden idea</b>, so more practice changes nothing.</p>
+<p class="m">Example: a student works out 1/3 + 1/4 and gets 2/7. They are adding the tops and adding the bottoms separately.</p>
+</div></section>
+
+<section class="s l"><div class="p">
+<h2>Step 1: guess the hidden idea</h2>
+<p>An AI model (Gemma) writes small programs. Each one acts out a different wrong idea a student might have.</p>
+<p>We run them all on the student’s answer. Only the programs that give the exact same wrong answer stay <b class="b">lit</b>. The rest go dark.</p>
+</div></section>
+
+<section class="s r"><div class="p">
+<h2>Step 2: ask the question that splits the guesses</h2>
+<p>Two guesses can give the same answer to one question. So we pick the next question where the guesses give <b class="b">different</b> answers.</p>
+<p>The student’s reply tells us which guess is right, using as few questions as possible.</p>
+</div></section>
+
+<section class="s l"><div class="p">
+<h2>Step 3: show them why it breaks</h2>
+<p>Once we are confident, we show a case where the student’s own idea gives an absurd result, like 1/2 + 1/2 = 1/2.</p>
+<p>The <b class="a">broken idea</b> gets replaced by the <b class="g">right one</b>, and a fresh question checks that it stuck.</p>
+</div></section>
+
+<section class="s r"><div class="p">
+<h2>Why this is different</h2>
+<ol>
+<li><b>Nothing is hand-written.</b> The AI writes the wrong ideas, so the tutor isn’t limited to a short fixed list.</li>
+<li><b>Everything is checked.</b> A guess only counts if the code reproduces the student’s answer, and answer keys come from a math solver.</li>
+<li><b>It admits doubt.</b> When no guess fits, it says “not sure” instead of making something up.</li>
+</ol>
+</div></section>
+
+<section class="s l"><div class="p">
+<h2>How we will prove it works</h2>
+<p>We test with simulated students who each have a known wrong idea, and measure three things:</p>
+<ol>
+<li>How often it finds the right idea.</li>
+<li>How few questions it needs.</li>
+<li>Whether targeted practice fixes the mistake faster than random practice.</li>
+</ol>
+<p class="m sm">The tests are simulations and we say so. A small pilot with friends is our stretch goal.</p>
+</div></section>
+
+<section class="s r"><div class="p">
+<h2>Built with Antigravity</h2>
+<p>Five small jobs, one agent each, each with a check that says it works:</p>
+<ol>
+<li>A safe runner and answer checker</li>
+<li>The wrong-idea writer</li>
+<li>The idea grouper</li>
+<li>The question picker</li>
+<li>The app, with photo input</li>
+</ol>
+<p class="m sm">Free open tools, mostly Google: Gemma 3, EmbeddingGemma, Google ADK, SymPy, Gradio.</p>
+<p class="m sm">Plan: 10 to 24 Nov jobs 1 to 3. By 1 Dec jobs 4 and 5 with a working demo. Finals 15 to 18 Dec.</p>
+</div></section>
+</main>
+<footer>
+<p><b>Rootcause</b>: an AI tutor that finds the hidden idea behind repeated mistakes.</p>
+<p class="m sm">Idea submission for Perceptron Hackathon 2026, Round 1. Theme 5: AI That Teaches, Problem 8.</p>
+<button class="btn" id="share">Share this page</button><a class="btn o" href="#s0">Back to top</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const R=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const secs=[...document.querySelectorAll(".s")],N=secs.length;
+secs.forEach((s,i)=>s.id="s"+i);
+const sh=document.getElementById("share");sh.onclick=async()=>{const u=location.href;try{if(navigator.share){await navigator.share({title:document.title,url:u})}else{await navigator.clipboard.writeText(u);sh.textContent="Link copied"}}catch(e){try{await navigator.clipboard.writeText(u);sh.textContent="Link copied"}catch(x){sh.textContent="Copy the link from the address bar"}}};
+const ss=(a,b,x)=>{x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*(3-2*x)};
+let U=0,tU=0,px=0;
+function calc(){const y=scrollY+innerHeight/2,c=secs.map(e=>e.offsetTop+e.offsetHeight/2);let i=0;while(i<N-2&&y>c[i+1])i++;
+const t=Math.min(1,Math.max(0,(y-c[i])/(c[i+1]-c[i])));tU=Math.min(N-1,Math.max(0,i+t));
+document.getElementById("pb").style.transform="scaleX("+(tU/(N-1))+")"}
+addEventListener("scroll",calc,{passive:true});addEventListener("resize",calc);
+addEventListener("pointermove",e=>{px=e.clientX/innerWidth-.5},{passive:true});
+calc();
+try{
+const cv=document.getElementById("c"),rd=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+rd.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,300);sc.add(cam);
+const dm=matchMedia("(prefers-color-scheme: dark)");
+const fogc=()=>new THREE.Color(getComputedStyle(document.body).backgroundColor);
+sc.fog=new THREE.Fog(fogc(),12,62);
+cam.add(new THREE.PointLight(0xffffff,1.1,60));sc.add(new THREE.AmbientLight(0xffffff,.75));
+const BL=0x4f8cff,AM=0xffa83a,GR=0x2fd08f,GY=0x5a6684;
+const M=(c,e)=>new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:e,roughness:.4,metalness:.1});
+const S=i=>i%2===0?3.4:-3.4,Z=i=>-22*i;
+const G=i=>{const g=new THREE.Group();g.position.set(S(i),0,Z(i));sc.add(g);return g};
+// starfield
+const pa=new Float32Array(1800*3);for(let i=0;i<1800;i++){pa[i*3]=(Math.random()-.5)*44;pa[i*3+1]=(Math.random()-.5)*26;pa[i*3+2]=-Math.random()*N*22+12}
+const pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pa,3));
+const pm=new THREE.PointsMaterial({size:.08,color:dm.matches?0xffffff:0x1d2b4f,transparent:true,opacity:.7});sc.add(new THREE.Points(pg,pm));
+dm.addEventListener("change",()=>{sc.fog.color=fogc();pm.color.set(dm.matches?0xffffff:0x1d2b4f)});
+// 0 hero: a mind
+const g0=G(0);const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(2.2,1),new THREE.MeshBasicMaterial({color:BL,wireframe:true}));
+const in0=new THREE.Mesh(new THREE.SphereGeometry(.8,24,24),M(BL,.8));g0.add(ico,in0);
+// 1 many mistakes, one core
+const g1=G(1);const core=new THREE.Mesh(new THREE.SphereGeometry(.9,32,32),M(AM,.9));g1.add(core);
+const lp=[];for(let i=0;i<22;i++){const a=Math.random()*6.28,r=2.6+Math.random()*1.4,y=(Math.random()-.5)*3.2;
+const cb=new THREE.Mesh(new THREE.BoxGeometry(.38,.38,.38),M(AM,.35));cb.position.set(Math.cos(a)*r,y,Math.sin(a)*r);g1.add(cb);lp.push(new THREE.Vector3(),cb.position.clone())}
+g1.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(lp),new THREE.LineBasicMaterial({color:AM,transparent:true,opacity:.35})));
+// 2 guesses, some lit
+const g2=G(2),orbs=[];for(let j=0;j<7;j++){const lit=j===1||j===4;const o=new THREE.Mesh(new THREE.SphereGeometry(.55,24,24),M(lit?BL:GY,lit?.9:.08));
+o.position.set((j-3)*1.35,Math.sin(j*1.3)*.9,0);o.userData.lit=lit;g2.add(o);orbs.push(o)}
+// 3 fork
+const g3=G(3);const cv3=a=>new THREE.CatmullRomCurve3(a.map(p=>new THREE.Vector3(...p)));
+const tr=cv3([[0,-3,0],[0,-1.6,0],[0,-.8,0]]),bl=cv3([[0,-.8,0],[-1.4,.4,0],[-3,2.6,0]]),br=cv3([[0,-.8,0],[1.4,.4,0],[3,2.6,0]]);
+[tr,bl,br].forEach(c=>g3.add(new THREE.Mesh(new THREE.TubeGeometry(c,24,.05,6,false),new THREE.MeshBasicMaterial({color:0x9db4e8}))));
+const e1=new THREE.Mesh(new THREE.SphereGeometry(.5,20,20),M(BL,.8)),e2=new THREE.Mesh(new THREE.SphereGeometry(.5,20,20),M(AM,.8));
+e1.position.set(-3,2.6,0);e2.position.set(3,2.6,0);const tv=new THREE.Mesh(new THREE.SphereGeometry(.2,16,16),M(0xffffff,1));g3.add(e1,e2,tv);
+// 4 broken idea becomes right idea
+const g4=G(4);const bad=new THREE.Mesh(new THREE.SphereGeometry(1.3,32,32),M(AM,.8)),good=new THREE.Mesh(new THREE.TorusGeometry(1.6,.22,16,48),M(GR,.8));g4.add(bad,good);
+// 5 three principles
+const g5=G(5),pr=[BL,AM,GR].map((c,i)=>{const m=new THREE.Mesh(new THREE.IcosahedronGeometry(.95,0),M(c,.6));m.position.set((i-1)*2.6,(i%2)*.8,0);g5.add(m);return m});
+// 6 evidence bars
+const g6=G(6),bars=[];for(let j=0;j<10;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.5,1,.5),M(GR,.5)),h=.8+j*.32+Math.random()*.5;b.position.x=(j-4.5)*.7;b.userData.h=h;g6.add(b);bars.push(b)}
+// 7 five jobs
+const g7=G(7),jobs=[];for(let j=0;j<5;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.9,.9,.9),M(BL,.3));b.position.set((j-2)*1.5,(j%2)*.5,0);g7.add(b);jobs.push(b)}
+g7.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(jobs.map(b=>b.position)),new THREE.LineBasicMaterial({color:BL})));
+// camera path: [camera x,y,z-offset] per station
+const O=[[0,1,9],[-2,3.5,8],[2,.5,9],[-1.5,-1.2,8.5],[1.5,2.8,8],[-2,1,9],[0,3.6,8],[0,.6,10]];
+const cp=new THREE.CatmullRomCurve3(O.map((o,i)=>new THREE.Vector3(o[0],o[1],Z(i)+o[2])));
+const lk=new THREE.CatmullRomCurve3(O.map((o,i)=>new THREE.Vector3(S(i)*.3,0,Z(i))));
+function size(){const w=innerWidth,h=innerHeight;rd.setSize(w,h,false);cam.aspect=w/h;cam.fov=w/h<1?78:55;cam.updateProjectionMatrix()}
+addEventListener("resize",size);size();
+const clk=new THREE.Clock();
+function frame(){requestAnimationFrame(frame);const t=R?0:clk.getElapsedTime();
+U+=(tU-U)*(R?1:.07);const k=U/(N-1);
+cam.position.copy(cp.getPoint(k));cam.position.x+=px*.8;cam.lookAt(lk.getPoint(k));cam.rotateZ(Math.sin(U*1.6)*.07);
+ico.rotation.set(t*.15,t*.2,0);in0.scale.setScalar(1+Math.sin(t*2)*.08);
+g1.rotation.y=t*.25;core.scale.setScalar(1+Math.sin(t*3)*.06);
+orbs.forEach((o,j)=>{o.position.y=Math.sin(j*1.3+t)*.9;if(o.userData.lit)o.material.emissiveIntensity=.7+Math.sin(t*3)*.25});
+const q=(t*.35)%1,cy=Math.floor(t*.35)%2?bl:br;tv.position.copy(q<.4?tr.getPoint(q/.4):cy.getPoint((q-.4)/.6));
+const c=ss(3.7,4.3,U);bad.scale.setScalar(Math.max(.001,1-c));good.scale.setScalar(Math.max(.001,c));good.rotation.x=t*.6;bad.rotation.y=t*.5;
+pr.forEach((m,i)=>{m.rotation.x=t*.4+i;m.rotation.y=t*.5});
+const gr=ss(5.6,6.4,U);bars.forEach(b=>{const h=b.userData.h*Math.max(.02,gr);b.scale.y=h;b.position.y=h/2-1.5});
+jobs.forEach((b,j)=>{b.material.emissiveIntensity=.25+.75*Math.max(0,Math.sin(t*2-j*.9));b.rotation.y=t*.3});
+rd.render(sc,cam)}
+frame();
+}catch(e){document.body.classList.add("flat")}
+})();
+</script>
+</body></html>
