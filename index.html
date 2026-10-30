@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rootcause: a tutor that finds why you keep getting it wrong</title>
-<meta name="description" content="Rootcause is an AI tutor that finds the one wrong idea behind a learner’s repeated mistakes, then asks the right questions to fix it. Perceptron Hackathon 2026, Problem 8.">
+<title>Rootcause: a percentages tutor that finds the wrong rule behind your wrong answer</title>
+<meta name="description" content="Rootcause is a percentages tutor that finds the specific wrong rule behind a student’s wrong answer, confirms it with a second problem, then shows the fix. Perceptron Hackathon 2026, Problem 8.">
 <meta name="theme-color" content="#0a1020">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rootcause: a tutor that finds why you keep getting it wrong">
-<meta property="og:description" content="A 3D scroll walkthrough of an AI tutor that finds the hidden idea behind repeated mistakes. Perceptron Hackathon 2026.">
+<meta property="og:description" content="A 3D scroll walkthrough of a tutor that finds the hidden rule behind repeated percentage mistakes. Perceptron Hackathon 2026.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
 <style>
 :root{--bg:#eef2f9;--card:#ffffff;--ink:#0d1730;--mut:#4d5b78;--line:#cfd8e8;--acc:#2f6be0;--amb:#c76a00;--grn:#0a8a5c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -21,7 +21,8 @@ main{position:relative;z-index:1}
 .s.l{justify-content:flex-start}.s.r{justify-content:flex-end}
 .s.l,.s.r{padding-left:max(22px,6vw);padding-right:max(22px,6vw)}
 .p{max-width:470px;background:var(--card);background:color-mix(in srgb,var(--card) 86%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:28px}
-@media(max-width:780px){.p{max-width:none;width:100%}}
+.p.w{max-width:580px}
+@media(max-width:780px){.p,.p.w{max-width:none;width:100%}}
 h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.12;margin:0 0 .5em}
 h1{font-size:clamp(2.3rem,6vw,3.6rem)}h2{font-size:clamp(1.6rem,3.8vw,2.3rem)}
 p{margin:0 0 .9em}p:last-child{margin:0}
@@ -42,85 +43,141 @@ footer p{margin:0 auto .8em;max-width:56ch}
 </style></head>
 <body>
 <canvas id="c" aria-hidden="true"></canvas><div id="pb"></div>
-<header><a href="#s0"><b>Rootcause</b></a><nav><a href="#s1">Problem</a><a href="#s2">How it works</a><a href="#s5">Why different</a><a href="#s6">Proof</a><a href="#s7">Deliverables</a><a href="#s8">Build plan</a></nav></header>
+<header><a href="#s0"><b>Rootcause</b></a><nav><a href="#s1">Problem</a><a href="#s2">Five mistakes</a><a href="#s3">How it works</a><a href="#s5">Confidence</a><a href="#s8">Proof</a><a href="#s10">Stretch goals</a><a href="#s11">Evidence</a><a href="#s12">Build plan</a></nav></header>
 <main>
 <section class="s l"><div class="p">
-<h1>A tutor that finds why you keep getting it wrong.</h1>
-<p class="m">Most learners aren’t missing facts. One wrong idea in their head keeps causing the same kind of mistake. Rootcause finds that idea and helps fix it.</p>
+<h1>A tutor that finds the wrong rule behind your wrong answer.</h1>
+<p class="m">Most learners aren’t missing facts. One wrong rule in their head keeps producing the same kind of mistake. Rootcause, a percentages tutor, finds that rule and helps fix it.</p>
 <p class="sm m">Perceptron Hackathon 2026, Theme 5: AI That Teaches, Problem 8</p>
 <p class="hint">Scroll to follow the idea.</p>
 </div></section>
 
 <section class="s r"><div class="p">
 <h2>Saying “wrong” doesn’t help</h2>
-<p>Most apps mark an answer wrong and hand you more questions. But every orange block you see here is a different mistake caused by the <b class="a">same hidden idea</b>, so more practice changes nothing.</p>
-<p class="m">Example: a student works out 1/3 + 1/4 and gets 2/7. They are adding the tops and adding the bottoms separately.</p>
+<p>Most apps mark an answer wrong and hand you more questions. But many different wrong answers can come from the <b class="a">same hidden rule</b>, so more practice changes nothing.</p>
+<p class="m">Example: a price goes up 20%, then down 20%. A student says it ends where it started. They are adding the two changes instead of chaining them.</p>
 </div></section>
 
-<section class="s l"><div class="p">
-<h2>Step 1: guess the hidden idea</h2>
-<p>An AI model (Gemma) writes small programs. Each one acts out a different wrong idea a student might have.</p>
-<p>We run them all on the student’s answer. Only the programs that give the exact same wrong answer stay <b class="b">lit</b>. The rest go dark.</p>
+<section class="s l"><div class="p w">
+<h2>Five common mistakes, written as small Python rules</h2>
+<ol>
+<li><b class="a">Wrong base.</b> Price goes from 50 to 60, and the student divides the rise by 60 (new value) instead of 50. Answer: 16.7% instead of 20%.</li>
+<li><b class="a">Additive successive changes.</b> Up 20% then down 20% gives “0% change”. The truth is 100 → 120 → 96, which is −4%.</li>
+<li><b class="a">Wrong inverse.</b> A sale price of 150 after 25% off. The student adds 25% of 150 and gets 187.5. The real original price is 150 ÷ 0.75 = 200.</li>
+<li><b class="a">Percentage-points confusion.</b> A rate moves from 10% to 12% and the student says “up 2%”. It is up 2 points, which is a 20% relative rise.</li>
+<li><b class="a">Part:part read as part:whole.</b> Boys to girls is 2:3 and the student says boys are 2/3 of the class. It is 2/5 = 40%.</li>
+</ol>
 </div></section>
 
 <section class="s r"><div class="p">
-<h2>Step 2: ask the question that splits the guesses</h2>
-<p>Two guesses can give the same answer to one question. So we pick the next question where the guesses give <b class="b">different</b> answers.</p>
-<p>The student’s reply tells us which guess is right, using as few questions as possible.</p>
+<h2>Step 1: try every rule on the answer</h2>
+<p>The student enters a number, picks the method they used and rates their confidence from 1 to 5.</p>
+<p>Python runs <b class="b">all five rules</b> on the problem. Only the rules that reproduce the student’s exact answer stay lit. One answer alone gives a diagnosis of <b class="b">suspected</b>, never more.</p>
+</div></section>
+
+<section class="s l"><div class="p">
+<h2>Step 2: a second problem confirms it</h2>
+<p>Code picks a second problem where the correct answer and every rule’s answer all <b class="b">differ</b>, so each answer points to exactly one cause.</p>
+<ol>
+<li>Same rule explains both wrong answers: <b class="g">confirmed</b>.</li>
+<li>Second answer is correct: a possible slip, not a misconception.</li>
+<li>Anything else: <b class="a">uncertain</b>. We say so instead of guessing.</li>
+</ol>
+</div></section>
+
+<section class="s r"><div class="p">
+<h2>Extra: how sure are you?</h2>
+<p>Next to the method dropdown, we ask “How confident are you in this answer? (1 to 5)”. This adds a layer of metacognition.</p>
+<ol>
+<li>Wrong with confidence 5 flags a <b class="a">strong bug</b>, a deeply ingrained rule that gets practice first.</li>
+<li>Wrong with confidence 1 hints at a <b class="b">careless slip</b>, so the second problem checks it before anything is labelled.</li>
+</ol>
+<p class="m sm">Confidence is only a supporting signal and never decides the diagnosis. We also test whether it predicts which diagnoses the second problem confirms.</p>
 </div></section>
 
 <section class="s l"><div class="p">
 <h2>Step 3: show them why it breaks</h2>
-<p>Once we are confident, we show a case where the student’s own idea gives an absurd result, like 1/2 + 1/2 = 1/2.</p>
-<p>The <b class="a">broken idea</b> gets replaced by the <b class="g">right one</b>, and a fresh question checks that it stuck.</p>
+<p>On the student’s own numbers, we show the wrong and right methods side by side. Take 500, up 20% then down 20%:</p>
+<p><b class="a">Wrong:</b> +20% − 20% = 0%, so 500.<br><b class="g">Right:</b> 500 × 1.2 = 600, then 600 × 0.8 = <b class="g">480</b>.</p>
+<p>A short hint follows, then a fresh follow-up problem with a verified answer checks that it stuck.</p>
 </div></section>
 
 <section class="s r"><div class="p">
 <h2>Why this is different</h2>
 <ol>
-<li><b>Nothing is hand-written.</b> The AI writes the wrong ideas, so the tutor isn’t limited to a short fixed list.</li>
-<li><b>Everything is checked.</b> A guess only counts if the code reproduces the student’s answer, and answer keys come from a math solver.</li>
-<li><b>It admits doubt.</b> When no guess fits, it says “not sure” instead of making something up.</li>
+<li><b>Python decides.</b> All the maths and every diagnosis come from code. An optional LLM only turns typed working into a matching rule and rewrites our fixed explanations in friendlier words.</li>
+<li><b>It admits doubt.</b> Suspected, confirmed or uncertain, never a forced label.</li>
+<li><b>It remembers.</b> Every attempt is stored, so mistakes are tracked across sessions.</li>
 </ol>
 </div></section>
 
 <section class="s l"><div class="p">
 <h2>How we will prove it works</h2>
-<p>We test with simulated students who each have a known wrong idea, and measure three things:</p>
+<p>On peer-written wrong answers, we compare the tutor against a zero-shot LLM baseline and measure:</p>
 <ol>
-<li>How often it finds the right idea.</li>
-<li>How few questions it needs.</li>
-<li>Whether targeted practice fixes the mistake faster than random practice.</li>
+<li>Accuracy, and F1 for each of the five mistakes.</li>
+<li>Agreement between human labellers, and wrongly forced diagnoses.</li>
+<li>Follow-up success rate, and whether confidence predicts which diagnoses get confirmed.</li>
+<li>Error rate before and after targeted practice, against random practice.</li>
 </ol>
-<p class="m sm">The tests are simulations and we say so. A small pilot with friends is our stretch goal.</p>
+<p class="m sm">The pilot is small, so we report trends only.</p>
 </div></section>
 
 <section class="s r"><div class="p">
 <h2>What we deliver for Problem 8</h2>
 <p><b>The must-haves</b></p>
 <ol>
-<li>Sort a wrong answer into one of <b class="b">five clear categories</b>. The AI finds the categories from student mistakes, then we name the five most common.</li>
-<li>Make a <b class="b">new practice question</b> aimed at that category, with the answer checked by a math solver.</li>
+<li>Sort a wrong answer into one of <b class="b">five clear categories</b>: wrong base, additive successive changes, wrong inverse, percentage-points confusion and part:part as part:whole.</li>
+<li>Make a <b class="b">new practice problem</b> aimed at that category, with the answer checked by Python.</li>
 </ol>
 <p><b>The stretch goals</b></p>
 <ol start="3">
-<li>Remember each student’s mistakes across sessions in a Supabase database.</li>
-<li>Show that targeted practice <b class="g">reduces the mistake</b>, first with simulated students, then a small pilot with friends.</li>
+<li>Remember each student’s mistakes across sessions.</li>
+<li>Show that targeted practice <b class="g">reduces the mistake</b> more than random practice.</li>
 </ol>
-<p class="m sm">We also check our categories against real student errors from ASSISTments.</p>
+<p class="m sm">Plus our extra: confidence self-assessment.</p>
+</div></section>
+
+<section class="s l"><div class="p w">
+<h2>Stretch goals: how we will do it</h2>
+<ol>
+<li><b>Remembering across sessions.</b> A Supabase (Postgres) table logs every attempt: student, session, problem, answer, method, confidence, which rules matched and the label. A summary query gives each student’s mistake counts per rule.</li>
+<li><b>Targeted vs random practice.</b> Each peer takes a pre-test, then code assigns them by coin flip to targeted problems (aimed at their confirmed rule) or random problems. A matched post-test gives the error rate before and after.</li>
+<li><b>Peer-written answers.</b> Friends write wrong answers and say why. Two people label them blind, we compute their agreement, then compare tutor and zero-shot LLM against those labels.</li>
+<li><b>Follow-up and confidence.</b> We log whether each follow-up is solved, and compare confirmation rates across confidence 1 to 5.</li>
+</ol>
+</div></section>
+
+<section class="s r"><div class="p w">
+<h2>Early evidence (simulated)</h2>
+<p>We simulated 120 learners, each with one hidden bug. The tutor’s own pre-test, second problem and confirmation picked their target rule. Half then did targeted practice and half did random practice, with the same explanations in both.</p>
+<svg viewBox="0 0 300 150" role="img" aria-label="Line chart: share of problems answered with the target mistake across five sessions. Targeted falls from 0.86 to 0.09, random from 0.91 to 0.25." style="width:100%;height:auto;margin:6px 0 10px">
+<g style="stroke:var(--line);stroke-width:1"><line x1="30" y1="120" x2="290" y2="120"/><line x1="30" y1="10" x2="290" y2="10" stroke-dasharray="3 3"/></g>
+<polyline points="30,19.9 95,46.3 160,77.1 225,89.2 290,92.5" style="fill:none;stroke:var(--amb);stroke-width:2.5"/>
+<polyline points="30,25.4 95,77.1 160,103.5 225,110.1 290,110.1" style="fill:none;stroke:var(--grn);stroke-width:2.5"/>
+<g style="fill:var(--mut);font:9px system-ui,sans-serif"><text x="26" y="13" text-anchor="end">1</text><text x="26" y="123" text-anchor="end">0</text><text x="30" y="136" text-anchor="middle">pre</text><text x="95" y="136" text-anchor="middle">S2</text><text x="160" y="136" text-anchor="middle">S3</text><text x="225" y="136" text-anchor="middle">S4</text><text x="290" y="136" text-anchor="middle">post</text></g>
+<text x="255" y="80" text-anchor="middle" style="fill:var(--amb);font:600 9px system-ui,sans-serif">Random</text>
+<text x="255" y="103" text-anchor="middle" style="fill:var(--grn);font:600 9px system-ui,sans-serif">Targeted</text>
+</svg>
+<p class="sm">Share of relevant problems answered with the target mistake. <b class="g">Targeted</b> fell from 0.86 to 0.09 and <b class="a">random</b> from 0.91 to 0.25, a difference in mean drop of +0.13 (95% bootstrap +0.04 to +0.22).</p>
+<ol class="sm">
+<li><b>Null check:</b> with learning switched off, neither arm moved.</li>
+<li><b>Pilot size:</b> in 200 simulated pilots of 8 learners per arm, targeted came out ahead in 185.</li>
+</ol>
+<p class="m sm">This is a simulation. It tests our pipeline, and the learning rate is our assumption, so it is not evidence about real students. The real answer comes from the peer pilot, and we report trends only.</p>
 </div></section>
 
 <section class="s l"><div class="p">
 <h2>Built with Antigravity</h2>
 <p>Five small jobs, one agent each, each with a check that says it works:</p>
 <ol>
-<li>A safe runner and answer checker</li>
-<li>The wrong-idea writer</li>
-<li>The idea grouper</li>
-<li>The question picker</li>
-<li>The app, with photo input</li>
+<li>The five rules and an answer checker</li>
+<li>The second-problem picker (all answers differ)</li>
+<li>Diagnosis labels and confidence logic</li>
+<li>Storage and the evaluation scripts</li>
+<li>The app, with method dropdown and confidence rating</li>
 </ol>
-<p class="m sm">Free open tools, mostly Google: Gemma 3, EmbeddingGemma, Google ADK, SymPy, Supabase, Gradio.</p>
+<p class="m sm">Free tools: Python, Supabase (free tier), Gradio, and Gemma 3 as the optional wording helper.</p>
 <p class="m sm">Plan: 10 to 24 Nov jobs 1 to 3. By 1 Dec jobs 4 and 5 with a working demo. Finals 15 to 18 Dec.</p>
 </div></section>
 </main>
@@ -170,27 +227,33 @@ const g1=G(1);const core=new THREE.Mesh(new THREE.SphereGeometry(.9,32,32),M(AM,
 const lp=[];for(let i=0;i<22;i++){const a=Math.random()*6.28,r=2.6+Math.random()*1.4,y=(Math.random()-.5)*3.2;
 const cb=new THREE.Mesh(new THREE.BoxGeometry(.38,.38,.38),M(AM,.35));cb.position.set(Math.cos(a)*r,y,Math.sin(a)*r);g1.add(cb);lp.push(new THREE.Vector3(),cb.position.clone())}
 g1.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(lp),new THREE.LineBasicMaterial({color:AM,transparent:true,opacity:.35})));
-// 2 guesses, some lit
-const g2=G(2),orbs=[];for(let j=0;j<7;j++){const lit=j===1||j===4;const o=new THREE.Mesh(new THREE.SphereGeometry(.55,24,24),M(lit?BL:GY,lit?.9:.08));
-o.position.set((j-3)*1.35,Math.sin(j*1.3)*.9,0);o.userData.lit=lit;g2.add(o);orbs.push(o)}
+// 2 five mistakes
+const g2=G(2),o5=[];[BL,AM,GR,0xc77dff,0xff6b8a].forEach((c,j)=>{const o=new THREE.Mesh(new THREE.SphereGeometry(.55,24,24),M(c,.8));o.position.set((j-2)*1.5,0,0);g2.add(o);o5.push(o)});
+// 3 rules tried, some lit
+const g2b=G(3),orbs=[];for(let j=0;j<5;j++){const lit=j===1||j===3;const o=new THREE.Mesh(new THREE.SphereGeometry(.55,24,24),M(lit?BL:GY,lit?.9:.08));
+o.position.set((j-2)*1.5,Math.sin(j*1.3)*.9,0);o.userData.lit=lit;g2b.add(o);orbs.push(o)}
 // 3 fork
-const g3=G(3);const cv3=a=>new THREE.CatmullRomCurve3(a.map(p=>new THREE.Vector3(...p)));
+const g3=G(4);const cv3=a=>new THREE.CatmullRomCurve3(a.map(p=>new THREE.Vector3(...p)));
 const tr=cv3([[0,-3,0],[0,-1.6,0],[0,-.8,0]]),bl=cv3([[0,-.8,0],[-1.4,.4,0],[-3,2.6,0]]),br=cv3([[0,-.8,0],[1.4,.4,0],[3,2.6,0]]);
 [tr,bl,br].forEach(c=>g3.add(new THREE.Mesh(new THREE.TubeGeometry(c,24,.05,6,false),new THREE.MeshBasicMaterial({color:0x9db4e8}))));
 const e1=new THREE.Mesh(new THREE.SphereGeometry(.5,20,20),M(BL,.8)),e2=new THREE.Mesh(new THREE.SphereGeometry(.5,20,20),M(AM,.8));
 e1.position.set(-3,2.6,0);e2.position.set(3,2.6,0);const tv=new THREE.Mesh(new THREE.SphereGeometry(.2,16,16),M(0xffffff,1));g3.add(e1,e2,tv);
 // 4 broken idea becomes right idea
-const g4=G(4);const bad=new THREE.Mesh(new THREE.SphereGeometry(1.3,32,32),M(AM,.8)),good=new THREE.Mesh(new THREE.TorusGeometry(1.6,.22,16,48),M(GR,.8));g4.add(bad,good);
+const g4=G(6);const bad=new THREE.Mesh(new THREE.SphereGeometry(1.3,32,32),M(AM,.8)),good=new THREE.Mesh(new THREE.TorusGeometry(1.6,.22,16,48),M(GR,.8));g4.add(bad,good);
 // 5 three principles
-const g5=G(5),pr=[BL,AM,GR].map((c,i)=>{const m=new THREE.Mesh(new THREE.IcosahedronGeometry(.95,0),M(c,.6));m.position.set((i-1)*2.6,(i%2)*.8,0);g5.add(m);return m});
+const g5=G(7),pr=[BL,AM,GR].map((c,i)=>{const m=new THREE.Mesh(new THREE.IcosahedronGeometry(.95,0),M(c,.6));m.position.set((i-1)*2.6,(i%2)*.8,0);g5.add(m);return m});
 // 6 evidence bars
-const g6=G(6),bars=[];for(let j=0;j<10;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.5,1,.5),M(GR,.5)),h=.8+j*.32+Math.random()*.5;b.position.x=(j-4.5)*.7;b.userData.h=h;g6.add(b);bars.push(b)}
+const g6=G(8),bars=[];for(let j=0;j<10;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.5,1,.5),M(GR,.5)),h=.8+j*.32+Math.random()*.5;b.position.x=(j-4.5)*.7;b.userData.h=h;g6.add(b);bars.push(b)}
 // 7 five jobs
-const gd=G(7),dl=[];[[-1.2,.9,BL],[1.2,.9,BL],[-1.2,-.9,GR],[1.2,-.9,GR]].forEach(p=>{const m=new THREE.Mesh(new THREE.BoxGeometry(1.3,1.3,1.3),M(p[2],.5));m.position.set(p[0],p[1],0);gd.add(m);dl.push(m)});
-const g7=G(8),jobs=[];for(let j=0;j<5;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.9,.9,.9),M(BL,.3));b.position.set((j-2)*1.5,(j%2)*.5,0);g7.add(b);jobs.push(b)}
+const gd=G(9),dl=[];[[-1.2,.9,BL],[1.2,.9,BL],[-1.2,-.9,GR],[1.2,-.9,GR]].forEach(p=>{const m=new THREE.Mesh(new THREE.BoxGeometry(1.3,1.3,1.3),M(p[2],.5));m.position.set(p[0],p[1],0);gd.add(m);dl.push(m)});
+const g7=G(12),jobs=[];for(let j=0;j<5;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.9,.9,.9),M(BL,.3));b.position.set((j-2)*1.5,(j%2)*.5,0);g7.add(b);jobs.push(b)}
 g7.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(jobs.map(b=>b.position)),new THREE.LineBasicMaterial({color:BL})));
+// 5 confidence scale, 10 stretch rings
+const g5c=G(5),cf=[];for(let j=0;j<5;j++){const b=new THREE.Mesh(new THREE.BoxGeometry(.7,1,.7),M(j<2?GY:j<4?BL:AM,.5)),h=.7+j*.55;b.scale.y=h;b.position.set((j-2)*1.1,h/2-1.2,0);g5c.add(b);cf.push(b)}
+const g10=G(10),rg=[];for(let j=0;j<3;j++){const r=new THREE.Mesh(new THREE.TorusGeometry(1+j*.6,.07,12,64),M([BL,AM,GR][j],.6));g10.add(r);rg.push(r)}
+const g11=G(11),ev=[];for(let j=0;j<8;j++){const h=3.2*Math.pow(.62,j)+.15,b=new THREE.Mesh(new THREE.BoxGeometry(.5,1,.5),M(j<4?AM:GR,.5));b.scale.y=h;b.position.set((j-3.5)*.7,h/2-1.5,0);g11.add(b);ev.push(b)}
 // camera path: [camera x,y,z-offset] per station
-const O=[[0,1,9],[-2,3.5,8],[2,.5,9],[-1.5,-1.2,8.5],[1.5,2.8,8],[-2,1,9],[0,3.6,8],[1.5,1.5,9],[0,.6,10]];
+const O=[[0,1,9],[-2,3.5,8],[2,.5,9],[-1.5,-1.2,8.5],[1.5,2.8,8],[-2,1,9],[0,3.6,8],[1.5,1.5,9],[0,1,9],[-1.5,1.5,9],[1.5,1,9],[-1.5,1.5,9],[0,.6,10]];
 const cp=new THREE.CatmullRomCurve3(O.map((o,i)=>new THREE.Vector3(o[0],o[1],Z(i)+o[2])));
 const lk=new THREE.CatmullRomCurve3(O.map((o,i)=>new THREE.Vector3(S(i)*.3,0,Z(i))));
 function size(){const w=innerWidth,h=innerHeight;rd.setSize(w,h,false);cam.aspect=w/h;cam.fov=w/h<1?78:55;cam.updateProjectionMatrix()}
@@ -203,9 +266,10 @@ ico.rotation.set(t*.15,t*.2,0);in0.scale.setScalar(1+Math.sin(t*2)*.08);
 g1.rotation.y=t*.25;core.scale.setScalar(1+Math.sin(t*3)*.06);
 orbs.forEach((o,j)=>{o.position.y=Math.sin(j*1.3+t)*.9;if(o.userData.lit)o.material.emissiveIntensity=.7+Math.sin(t*3)*.25});
 const q=(t*.35)%1,cy=Math.floor(t*.35)%2?bl:br;tv.position.copy(q<.4?tr.getPoint(q/.4):cy.getPoint((q-.4)/.6));
-const c=ss(3.7,4.3,U);bad.scale.setScalar(Math.max(.001,1-c));good.scale.setScalar(Math.max(.001,c));good.rotation.x=t*.6;bad.rotation.y=t*.5;
+const c=ss(5.7,6.3,U);bad.scale.setScalar(Math.max(.001,1-c));good.scale.setScalar(Math.max(.001,c));good.rotation.x=t*.6;bad.rotation.y=t*.5;
+o5.forEach((o,j)=>{o.position.y=Math.cos(j*1.1+t)*.7});cf.forEach((b,j)=>{b.material.emissiveIntensity=.3+.5*Math.max(0,Math.sin(t*2-j*.7))});ev.forEach((b,j)=>{b.material.emissiveIntensity=.3+.5*Math.max(0,Math.sin(t*2-j*.5))});rg.forEach((r,j)=>{r.rotation.x=t*(.3+j*.15)+j;r.rotation.y=t*.25});
 pr.forEach((m,i)=>{m.rotation.x=t*.4+i;m.rotation.y=t*.5});
-const gr=ss(5.6,6.4,U);bars.forEach(b=>{const h=b.userData.h*Math.max(.02,gr);b.scale.y=h;b.position.y=h/2-1.5});
+const gr=ss(7.6,8.4,U);bars.forEach(b=>{const h=b.userData.h*Math.max(.02,gr);b.scale.y=h;b.position.y=h/2-1.5});
 dl.forEach((m,i)=>{m.rotation.y=t*.4+i;m.rotation.x=t*.2});jobs.forEach((b,j)=>{b.material.emissiveIntensity=.25+.75*Math.max(0,Math.sin(t*2-j*.9));b.rotation.y=t*.3});
 rd.render(sc,cam)}
 frame();
@@ -213,3 +277,4 @@ frame();
 })();
 </script>
 </body></html>
+
